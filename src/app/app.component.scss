@@ -1,44 +1,82 @@
 @import "../variables";
 
 main {
-  width: 100%;
+  min-width: 100vw;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
 
-  h1 {
-    font-size: 6rem;
+  .countdown_heading {
     color:$bordeaux;
-    font-weight: 800;
-    font-size: 67px;
-    line-height: 135%;
-    letter-spacing: -2%;
+    font-weight: bold;
   }
   .container {
-    padding: 24px 64px 24px;
+    width: 98vw;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
   }
-
-  .countdown {
-      p {
-          font-size: 18px;
-          margin: 10px 0;
-      }
-  }
-
-  .tile {
-      p {
-          font-size: 20px;
-          font-weight: bold;
-          margin: 20px 0;
-      }
-  }
-
-  .date {
-      p {
-          font-size: 16px;
-          color: #666;
-      }
+  .countdown_form{
+    display: flex;
+    width: 60vw;
+    margin: 4rem auto;
+    justify-content: center;
+    gap:2rem;
+    mat-form-field {
+      width: 100%;
+    }
+    /* Border */
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+      color:$border-color ;
+    }
+    /* Font color */
+    input.mat-input-element {
+      color: $black;
+    }
   }
 }
+
+.fittext{
+  white-space: nowrap;
+  text-wrap: nowrap;
+  display: inline-block;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-underline {
+  background-color: #ff884d; // Desired color when input is focused
+}
+
+$color-outline: red;
+
+mat-form-field {
+  ::ng-deep .mdc-floating-label {
+    color: $black !important;
+  }
+  /* Change outline border color */
+  ::ng-deep .mat-mdc-form-field .mat-mdc-form-field-outline {
+    color: red; /* Replace with your desired color */
+  }
+  ::ng-deep .mat-form-field-outline {
+    color: $color-outline !important;
+  }
+  ::ng-deep .mat-form-field-label {
+    color: $color-outline !important;
+  }
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: red!important;
+  }
+}
+/* Border */
+::ng-deep{
+  .mat-form-field-outline {
+    color: red;
+  }
+  /* Font color */
+  input.mat-input-element {
+    color: white;
+  }
+
+}
+

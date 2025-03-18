@@ -1,17 +1,28 @@
 
 <main class="main">
-  <div class="container">
-    <div class="header">
-        <h1>Time to Midsummer  Eve</h1>
-    </div>
-    <div class="countdown">
-        <p>Time to Midsummer Eve</p>
-        <p>20 days, 3 h, 15m, 10s</p>
-    </div>
-    <div>
 
+  <div class="container">
+    <div class="countdown_display">
+      <h1 [fittext]="true"
+      [modelToWatch]="title"
+      [activateOnResize]="true" class="countdown_heading fittext">{{title}}</h1>
+      <div [fittext]="true"
+      [modelToWatch]="countdown"
+      [activateOnResize]="true" class="countdown fittext">{{countdown}}</div>
     </div>
+
+    <form class="countdown_form" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="title" name="title" >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Date</mat-label>
+        <input matInput [(ngModel)]="date" name="date" type="date" >
+      </mat-form-field>
+    </form>
   </div>
+
 </main>
 
 <router-outlet />
