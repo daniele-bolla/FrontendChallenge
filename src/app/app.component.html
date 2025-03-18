@@ -8,10 +8,10 @@
       [activateOnResize]="true" class="countdown_heading fittext">{{title}}</h1>
       <div [fittext]="true"
       [modelToWatch]="countdown"
-      [activateOnResize]="true" class="countdown fittext">{{countdown}}</div>
+      [activateOnResize]="true" class="countdown fittext">{{ formatCountdown(countdown)}}</div>
     </div>
 
-    <form class="countdown_form" (ngSubmit)="onSubmit()">
+    <form class="countdown_form">
       <mat-form-field appearance="outline">
         <mat-label>Title</mat-label>
         <input matInput [(ngModel)]="title" name="title" >
