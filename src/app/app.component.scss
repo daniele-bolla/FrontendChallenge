@@ -7,6 +7,7 @@ main {
   justify-content: center;
   align-items: center;
   position: relative;
+  flex-direction: column;
 
   .countdown_heading {
     color:$bordeaux;
@@ -18,6 +19,8 @@ main {
     display: flex;
     flex-direction: column;
   }
+
+
   .countdown_form{
     display: flex;
     width: 60vw;
@@ -27,17 +30,26 @@ main {
     mat-form-field {
       width: 100%;
     }
-    /* Border */
     .mat-form-field-appearance-outline .mat-form-field-outline {
       color:$border-color ;
     }
-    /* Font color */
     input.mat-input-element {
       color: $black;
     }
   }
+  @media (orientation: landscape) and (min-width: 768px) {
+    .countdown_form {
+      flex-direction: row;
+    }
+  }
+
+  @media (orientation: portrait) and (max-width: 768px) {
+    .countdown_form {
+      flex-direction: column;
+    }
 }
 
+}
 .fittext{
   white-space: nowrap;
   text-wrap: nowrap;

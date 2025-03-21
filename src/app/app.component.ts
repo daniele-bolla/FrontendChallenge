@@ -1,22 +1,34 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router'
-import { Ng2FittextModule } from "ng2-fittext";
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms'; // Import FormsModule
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {provideNativeDateAdapter} from '@angular/material/core';
+
+import { FormsModule } from '@angular/forms';
+import { Ng2FittextModule } from "ng2-fittext";
+
+
+import { Subscription, interval } from 'rxjs';
+
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import utc from 'dayjs/plugin/utc';
-import { Subscription, interval } from 'rxjs';
 import timezone from 'dayjs/plugin/timezone';
 dayjs.extend(duration);
 dayjs.extend(utc)
 dayjs.extend(timezone)
 dayjs.tz.setDefault()
-
+const getNextDays = (currentDate = new Date(), daysToAdd = 1) => {
+  const nextDate = new Date(currentDate)
+  nextDate.setDate(currentDate.getDate() + daysToAdd)
+  return nextDate
+}
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Ng2FittextModule, FormsModule, MatInputModule],
+  providers: [provideNativeDateAdapter()],
+  imports: [RouterOutlet, Ng2FittextModule, FormsModule, MatInputModule, MatDatepickerModule, MatNativeDateModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 
@@ -25,9 +37,9 @@ export class AppComponent {
 
   title = 'Time to Midsummer Eve'
   date = '2025-06-21'
+  now = getNextDays()
   countdown: { days: number; hours: number; minutes: number; seconds: number } = { days: 0, hours: 0, minutes: 0, seconds: 0 };
   private subscription: Subscription | undefined;
-
   ngOnInit(): void {
     this.startCountdown();
   }
@@ -62,9 +74,3 @@ export class AppComponent {
     return `${countdown.days} days, ${countdown.hours} h, ${countdown.minutes}m, ${countdown.seconds}s`;
   }
 }
-
-
-function intervalToDuration(arg0: { start: Date; end: Date; }) {
-  throw new Error('Function not implemented.');
-}
-
