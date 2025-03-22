@@ -6,6 +6,8 @@ I have been using Day.js as my choice for implementing the countdown. However, I
 
 The timezone is set to London, and it would be ideal to match the user local as well.
 
+The input date has been disabled to avoid issues but that could be solved in cleaner way.
+
 Another improvement would be to be able to switch between different storage options like localStorage, sessionStorage, or an in-memory database.
 I didn't focus on accessibility, and there is room for improvement in responsiveness.
 Error handling has not been implemented, though it is always an essential feature.

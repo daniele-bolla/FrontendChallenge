@@ -30,6 +30,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Date</mat-label>
         <input
+          disabled
           matInput
           [matDatepicker]="picker"
           [min]="now"
@@ -40,7 +41,7 @@
           [ngModelOptions]="{standalone: true}"
         >
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-datepicker disabled="false" #picker></mat-datepicker>
       </mat-form-field>
     </form>
   </div>
