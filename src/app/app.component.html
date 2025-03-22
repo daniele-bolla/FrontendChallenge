@@ -16,34 +16,35 @@
         class="countdown fittext"
       >{{ formatCountdown(countdown)}}</div>
     </div>
+    <form class="countdown_form">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input
+          matInput
+          [(ngModel)]="eventName"
+          name="eventName"
+          [ngModelOptions]="{standalone: true}"
+          (ngModelChange)="updateEventName()"
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [min]="now"
+          placeholder="Countdown Date"
+          [(ngModel)]="eventDate"
+          (dateChange)="updateEventDate()"
+          name="eventDate"
+          [ngModelOptions]="{standalone: true}"
+        >
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </form>
   </div>
-  <form class="countdown_form">
-    <mat-form-field appearance="outline">
-      <mat-label>Title</mat-label>
-      <input
-        matInput
-        [(ngModel)]="eventName"
-        name="eventName"
-        [ngModelOptions]="{standalone: true}"
-        (ngModelChange)="updateEventName()"
-      >
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Date</mat-label>
-      <input
-        matInput
-        [matDatepicker]="picker"
-        [min]="now"
-        placeholder="Countdown Date"
-        [(ngModel)]="eventDate"
-        (dateChange)="updateEventDate()"
-        name="eventDate"
-        [ngModelOptions]="{standalone: true}"
-      >
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </form>
+
 
 </main>
 

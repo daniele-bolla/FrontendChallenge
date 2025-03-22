@@ -3,6 +3,7 @@
 main {
   min-width: 100vw;
   min-height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,13 +19,14 @@ main {
     text-align: center;
     display: flex;
     flex-direction: column;
+
   }
 
 
   .countdown_form{
     display: flex;
     width: 60vw;
-    margin: 4rem auto;
+    margin: auto;
     justify-content: center;
     gap:2rem;
     mat-form-field {
@@ -37,15 +39,22 @@ main {
       color: $black;
     }
   }
+
   @media (orientation: landscape) and (min-width: 768px) {
     .countdown_form {
       flex-direction: row;
+    }
+    .countdown_display{
+      margin-bottom: 4rem;
     }
   }
 
   @media (orientation: portrait) and (max-width: 768px) {
     .countdown_form {
       flex-direction: column;
+    }
+    .countdown_display{
+      margin-bottom: 10rem;
     }
 }
 
@@ -54,41 +63,5 @@ main {
   white-space: nowrap;
   text-wrap: nowrap;
   display: inline-block;
-}
-
-::ng-deep .mat-form-field.mat-focused .mat-form-field-underline {
-  background-color: #ff884d; // Desired color when input is focused
-}
-
-$color-outline: red;
-
-mat-form-field {
-  ::ng-deep .mdc-floating-label {
-    color: $black !important;
-  }
-  /* Change outline border color */
-  ::ng-deep .mat-mdc-form-field .mat-mdc-form-field-outline {
-    color: red; /* Replace with your desired color */
-  }
-  ::ng-deep .mat-form-field-outline {
-    color: $color-outline !important;
-  }
-  ::ng-deep .mat-form-field-label {
-    color: $color-outline !important;
-  }
-  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: red!important;
-  }
-}
-/* Border */
-::ng-deep{
-  .mat-form-field-outline {
-    color: red;
-  }
-  /* Font color */
-  input.mat-input-element {
-    color: white;
-  }
-
 }
 
