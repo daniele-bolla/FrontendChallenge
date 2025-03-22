@@ -19,10 +19,7 @@ main {
     text-align: center;
     display: flex;
     flex-direction: column;
-
   }
-
-
   .countdown_form{
     display: flex;
     width: 60vw;
@@ -56,8 +53,7 @@ main {
     .countdown_display{
       margin-bottom: 10rem;
     }
-}
-
+  }
 }
 .fittext{
   white-space: nowrap;

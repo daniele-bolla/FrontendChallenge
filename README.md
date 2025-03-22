@@ -1,33 +1,18 @@
-# Description & requirements
+## Possible imprvements
+I haven't been using Angular for a while and was a bit rusty at first. However, I soon rediscovered the potential of working with this framework and how much I love its clean structure and using RxJS.
 
-Your objective in this assignment is to create a countdown app built using this boilerplate (+ any other tools of your choice) that follows the design specifications provided [in this Figma file](https://www.figma.com/file/UPEugUz5jM9IzIkWft2Y9m/NC-challenge). The app should work in portrait as well as in landscape mode while the text displayed on the screen should always fill the whole width of the screen.
+The current state of the app is basic but can be eventually improved. 
+I have been using Day.js as my choice for implementing the countdown. However, I discovered that it is not a primary choice for dealing with Angular Material and would be good to replace it with another library like date-fns, which has Material adapters. Another option is to create a custom adapter or use some Day.js adapter from other users on npm, although they are not officially supported.
 
-In your app, it should be possible to define the end date and the name of the event taking place on that day. The countdown should always start from the current time and it should display the time remaining to your specified end date in the following format: Days, Hours(h), Minutes(m), Seconds(s) *(e.g., 3 days, 15 h, 20 m, 5 s)*. To make sure the text always covers the entire screen width, it should resize whenever necessary to achieve this objective.
+Another improvement would be to be able to switch between different storage options like localStorage, sessionStorage, or an in-memory database.
+I didn't focus on accessibility, and there is room for improvement in responsiveness.
+Error handling has not been implemented, though it is always an essential feature.
+The CSS is simple and aims to follow the BEM system, but the design is not always adhered to rigorously from Figma.
 
-The purpose of the solution is to “fit” the input text into an element in one line (no line breaks, filling the whole width) using the maximum possible font-size.
-
-Please make sure that your text fit solution is reusable and that the event name, as well as the specified end date, are persisted between page reloads.
-
-**Once you feel ready to share your solution, please:**
-
-- Commit the code to Github or your favorite VCS.
-- Write a simple README.md explaining how to set up the project (assuming it’s read by a developer who is experienced with all the used tools).
-- Include a URL to a deployed working Web page (use netlify.com or github.io or whatever simple hosting tool that works for you).
-
-Please put the resulting project in a public github repository and provide a link to it. Please make it easy for us to test the result.
-
-## Optional goals
-
-You’re free to complete this additional goal to get a higher score if you want!
-
-1. Write suggestions of how this solution can be improved. Describe what the next steps would be in order for this app to be production ready. 
-
+I also didn't customize the Material inputs.
 ## Running the app
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files. 
 
-## Further help
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Hosted version 
+The app is running n gh pages [https://daniele-bolla.github.io/FrontendChallenge/](https://daniele-bolla.github.io/FrontendChallenge/)
