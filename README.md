@@ -4,6 +4,8 @@ I haven't been using Angular for a while and was a bit rusty at first. However, 
 The current state of the app is basic but can be eventually improved. 
 I have been using Day.js as my choice for implementing the countdown. However, I discovered that it is not a primary choice for dealing with Angular Material and would be good to replace it with another library like date-fns, which has Material adapters. Another option is to create a custom adapter or use some Day.js adapter from other users on npm, although they are not officially supported.
 
+The timezone is set to London, and it would be ideal to match the user local as well.
+
 Another improvement would be to be able to switch between different storage options like localStorage, sessionStorage, or an in-memory database.
 I didn't focus on accessibility, and there is room for improvement in responsiveness.
 Error handling has not been implemented, though it is always an essential feature.
