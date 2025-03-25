@@ -1,11 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  ViewChild,
-  OnInit,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -13,7 +6,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
 import { FormsModule } from '@angular/forms';
-// import { Ng2FittextModule } from "ng2-fittext";
+import { FitTextDirective } from './fit-text.directive';
 
 import { Subscription, interval } from 'rxjs';
 import { LocalStorageService } from '../services/localStorageService';
@@ -37,6 +30,7 @@ const getNextDays = (currentDate = new Date(), daysToAdd = 1) => {
   standalone: true,
   providers: [provideNativeDateAdapter(), LocalStorageService],
   imports: [
+    FitTextDirective,
     RouterOutlet,
     FormsModule,
     MatInputModule,
@@ -47,8 +41,6 @@ const getNextDays = (currentDate = new Date(), daysToAdd = 1) => {
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, OnDestroy {
-  @ViewChild('textEl') textEl!: ElementRef;
-  @HostListener('window:resize', ['$event'])
   eventName = 'Time to Midsummer Eve';
   eventDate = '2025-06-21';
   now = getNextDays();
@@ -65,16 +57,10 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private localStorageService: LocalStorageService) {
     this.localStorageService = localStorageService;
   }
-  onResize() {
-    fittext(this.textEl);
-  }
 
   ngOnInit(): void {
     this.loadFromLocalStorage();
     this.startCountdown();
-    if (this.textEl) {
-      fittext(this.textEl);
-    }
   }
 
   ngOnDestroy(): void {
@@ -141,9 +127,4 @@ export class AppComponent implements OnInit, OnDestroy {
   }): string {
     return `${countdown.days} days, ${countdown.hours} h, ${countdown.minutes}m, ${countdown.seconds}s`;
   }
-}
-
-function fittext(textEl: ElementRef) {
-  console.log(textEl);
-  /**TODO */
 }
