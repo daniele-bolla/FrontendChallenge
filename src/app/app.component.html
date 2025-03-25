@@ -5,11 +5,14 @@
     <div class="countdown_display">
       <h1
         appFitText
+        [modelToWatch]="eventName"
         class="countdown_heading fittext"
-      >{{eventName}}</h1>
+      >some</h1>
       <h1
-        class="countdown fittext"
-      >{{ formattedCountdown}}</h1>
+      appFitText
+      [modelToWatch]="formattedCountdown"
+      class="countdown fittext"
+      >content</h1>
     </div>
     <form class="countdown_form">
       <mat-form-field appearance="outline">
