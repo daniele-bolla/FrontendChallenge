@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router'
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  ViewChild,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {provideNativeDateAdapter} from '@angular/material/core';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 import { FormsModule } from '@angular/forms';
-import { Ng2FittextModule } from "ng2-fittext";
+// import { Ng2FittextModule } from "ng2-fittext";
 
 import { Subscription, interval } from 'rxjs';
 import { LocalStorageService } from '../services/localStorageService';
@@ -16,39 +23,58 @@ import duration from 'dayjs/plugin/duration';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 dayjs.extend(duration);
-dayjs.extend(utc)
-dayjs.extend(timezone)
-dayjs.tz.setDefault("Europe/London")
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault('Europe/London');
 
 const getNextDays = (currentDate = new Date(), daysToAdd = 1) => {
-  const nextDate = new Date(currentDate)
-  nextDate.setDate(currentDate.getDate() + daysToAdd)
-  return nextDate
-}
+  const nextDate = new Date(currentDate);
+  nextDate.setDate(currentDate.getDate() + daysToAdd);
+  return nextDate;
+};
 @Component({
   selector: 'app-root',
   standalone: true,
   providers: [provideNativeDateAdapter(), LocalStorageService],
-  imports: [RouterOutlet, Ng2FittextModule, FormsModule, MatInputModule, MatDatepickerModule, MatNativeDateModule],
+  imports: [
+    RouterOutlet,
+    FormsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-
 })
-export class AppComponent {
-
-  eventName = 'Time to Midsummer Eve'
-  eventDate = '2025-06-21'
-  now = getNextDays()
-  countdown: { days: number; hours: number; minutes: number; seconds: number } = { days: 0, hours: 0, minutes: 0, seconds: 0 };
+export class AppComponent implements OnInit, OnDestroy {
+  @ViewChild('textEl') textEl!: ElementRef;
+  @HostListener('window:resize', ['$event'])
+  eventName = 'Time to Midsummer Eve';
+  eventDate = '2025-06-21';
+  now = getNextDays();
+  countdown: { days: number; hours: number; minutes: number; seconds: number } =
+    {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    };
+  formattedCountdown = '';
   private subscription: Subscription | undefined;
 
   constructor(private localStorageService: LocalStorageService) {
     this.localStorageService = localStorageService;
   }
+  onResize() {
+    fittext(this.textEl);
+  }
 
   ngOnInit(): void {
     this.loadFromLocalStorage();
     this.startCountdown();
+    if (this.textEl) {
+      fittext(this.textEl);
+    }
   }
 
   ngOnDestroy(): void {
@@ -57,12 +83,15 @@ export class AppComponent {
     }
   }
 
-  updateEventName(){
+  updateEventName() {
     this.localStorageService.setItem('eventName', this.eventName);
   }
 
-  updateEventDate(){
-    this.localStorageService.setItem('eventDate', new Date(this.eventDate).toISOString());
+  updateEventDate() {
+    this.localStorageService.setItem(
+      'eventDate',
+      new Date(this.eventDate).toISOString()
+    );
   }
 
   startCountdown(): void {
@@ -71,11 +100,13 @@ export class AppComponent {
     }
     this.subscription = interval(1000).subscribe(() => {
       this.countdown = this.calculateCountdown(this.eventDate);
+      this.formattedCountdown = this.formatCountdown(this.countdown);
     });
   }
 
   private loadFromLocalStorage(): void {
-    const storedEventName = this.localStorageService.getItem<string>('eventName');
+    const storedEventName =
+      this.localStorageService.getItem<string>('eventName');
     const storedDate = this.localStorageService.getItem<string>('eventDate');
 
     if (storedEventName) {
@@ -86,18 +117,33 @@ export class AppComponent {
     }
   }
 
-  private calculateCountdown(endDate: string): { days: number; hours: number; minutes: number; seconds: number } {
+  private calculateCountdown(endDate: string): {
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  } {
     const now = dayjs();
     const duration = dayjs.duration(dayjs(endDate).diff(now));
     return {
-      days: dayjs(endDate).diff(now,'days'),
+      days: dayjs(endDate).diff(now, 'days'),
       hours: duration.hours(),
       minutes: duration.minutes(),
       seconds: duration.seconds(),
     };
   }
 
-  formatCountdown(countdown: { days: number; hours: number; minutes: number; seconds: number }): string {
+  formatCountdown(countdown: {
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  }): string {
     return `${countdown.days} days, ${countdown.hours} h, ${countdown.minutes}m, ${countdown.seconds}s`;
   }
+}
+
+function fittext(textEl: ElementRef) {
+  console.log(textEl);
+  /**TODO */
 }

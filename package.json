@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prettier": "prettier . --write",
-    "deploy":"ng deploy --base-href=/FrontendChallenge/"
+    "deploy": "ng deploy --base-href=/FrontendChallenge/",
+    "lint": "ng lint --fix"
   },
   "private": true,
   "dependencies": {
@@ -23,8 +24,6 @@
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
     "dayjs": "^1.11.13",
-    "ng2-fittext": "^1.4.3",
-    "prettier": "^3.2.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
@@ -34,6 +33,12 @@
     "@angular/cli": "^17.3.6",
     "@angular/compiler-cli": "^17.3.0",
     "angular-cli-ghpages": "^2.0.3",
-    "typescript": "~5.4.2"
+    "angular-eslint": "19.3.0",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.5",
+    "prettier": "^3.5.3",
+    "typescript": "~5.4.2",
+    "typescript-eslint": "8.27.0"
   }
 }
