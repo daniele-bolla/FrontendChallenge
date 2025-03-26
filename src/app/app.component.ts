@@ -44,19 +44,21 @@ export class AppComponent implements OnInit, OnDestroy {
   eventName = 'Time to Midsummer Eve';
   eventDate = '2025-06-21';
   tomorrow = getNextDays();
-  countdownDays = 0;
-  countdownHms: { hours: number; minutes: number; seconds: number } = {
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  };
+  countdown: { days: number; hours: number; minutes: number; seconds: number } =
+    {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    };
   formattedCountdown = '';
   private subscription: Subscription | undefined;
 
   constructor(private localStorageService: LocalStorageService) {
     this.localStorageService = localStorageService;
-    const { days, hms } = this.calculateCountdown(this.eventDate);
-    this.formattedCountdown = this.formatCountdown({ days, ...hms });
+    this.formattedCountdown = this.formatCountdown(
+      this.calculateCountdown(this.eventDate)
+    );
   }
 
   ngOnInit(): void {
@@ -86,10 +88,8 @@ export class AppComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
     }
     this.subscription = interval(1000).subscribe(() => {
-      const { days, hms } = this.calculateCountdown(this.eventDate);
-      if (this.countdownDays !== days) this.countdownDays = days;
-      this.countdownHms = hms;
-      this.formattedCountdown = this.formatCountdown({ days, ...hms });
+      this.countdown = this.calculateCountdown(this.eventDate);
+      this.formattedCountdown = this.formatCountdown(this.countdown);
     });
   }
 
@@ -108,21 +108,17 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private calculateCountdown(endDate: string): {
     days: number;
-    hms: {
-      hours: number;
-      minutes: number;
-      seconds: number;
-    };
+    hours: number;
+    minutes: number;
+    seconds: number;
   } {
     const now = dayjs();
     const duration = dayjs.duration(dayjs(endDate).diff(now));
     return {
       days: dayjs(endDate).diff(now, 'days'),
-      hms: {
-        hours: duration.hours(),
-        minutes: duration.minutes(),
-        seconds: duration.seconds(),
-      },
+      hours: duration.hours(),
+      minutes: duration.minutes(),
+      seconds: duration.seconds(),
     };
   }
 
@@ -132,6 +128,7 @@ export class AppComponent implements OnInit, OnDestroy {
     minutes: number;
     seconds: number;
   }): string {
-    return `${countdown.days} days, ${countdown.hours} h, ${countdown.minutes}m, ${countdown.seconds}s`;
+    const pad = (num: number) => num.toString().padStart(2, '0');
+    return `${countdown.days} days, ${pad(countdown.hours)} h, ${pad(countdown.minutes)}m, ${pad(countdown.seconds)}s`;
   }
 }
