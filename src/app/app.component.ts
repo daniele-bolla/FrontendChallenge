@@ -50,11 +50,13 @@ export class AppComponent implements OnInit, OnDestroy {
     minutes: 0,
     seconds: 0,
   };
-  formattedCountdown = 'Time to Midsummer Eve';
+  formattedCountdown = '';
   private subscription: Subscription | undefined;
 
   constructor(private localStorageService: LocalStorageService) {
     this.localStorageService = localStorageService;
+    const { days, hms } = this.calculateCountdown(this.eventDate);
+    this.formattedCountdown = this.formatCountdown({ days, ...hms });
   }
 
   ngOnInit(): void {
