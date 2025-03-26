@@ -7,12 +7,12 @@
         appFitText
         [modelToWatch]="eventName"
         class="countdown_heading fittext"
-      >some</h1>
+      >{{eventName}}</h1>
       <h1
       appFitText
-      [modelToWatch]="formattedCountdown"
+      [modelToWatch]="countdownDays"
       class="countdown fittext"
-      >content</h1>
+      >{{formattedCountdown}}</h1>
     </div>
     <form class="countdown_form">
       <mat-form-field appearance="outline">
@@ -31,7 +31,7 @@
           disabled
           matInput
           [matDatepicker]="picker"
-          [min]="now"
+          [min]="tomorrow"
           placeholder="Countdown Date"
           [(ngModel)]="eventDate"
           (dateChange)="updateEventDate"

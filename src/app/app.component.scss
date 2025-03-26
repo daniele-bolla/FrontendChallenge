@@ -55,4 +55,8 @@ main {
     }
   }
 }
-
+[appFitText] {
+  display: inline-block;
+  text-wrap: nowrap;
+  white-space: nowrap;
+}

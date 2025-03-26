@@ -43,15 +43,14 @@ const getNextDays = (currentDate = new Date(), daysToAdd = 1) => {
 export class AppComponent implements OnInit, OnDestroy {
   eventName = 'Time to Midsummer Eve';
   eventDate = '2025-06-21';
-  now = getNextDays();
-  countdown: { days: number; hours: number; minutes: number; seconds: number } =
-    {
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-    };
-  formattedCountdown = '';
+  tomorrow = getNextDays();
+  countdownDays = 0;
+  countdownHms: { hours: number; minutes: number; seconds: number } = {
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  };
+  formattedCountdown = 'Time to Midsummer Eve';
   private subscription: Subscription | undefined;
 
   constructor(private localStorageService: LocalStorageService) {
@@ -85,8 +84,10 @@ export class AppComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
     }
     this.subscription = interval(1000).subscribe(() => {
-      this.countdown = this.calculateCountdown(this.eventDate);
-      this.formattedCountdown = this.formatCountdown(this.countdown);
+      const { days, hms } = this.calculateCountdown(this.eventDate);
+      if (this.countdownDays !== days) this.countdownDays = days;
+      this.countdownHms = hms;
+      this.formattedCountdown = this.formatCountdown({ days, ...hms });
     });
   }
 
@@ -105,17 +106,21 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private calculateCountdown(endDate: string): {
     days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
+    hms: {
+      hours: number;
+      minutes: number;
+      seconds: number;
+    };
   } {
     const now = dayjs();
     const duration = dayjs.duration(dayjs(endDate).diff(now));
     return {
       days: dayjs(endDate).diff(now, 'days'),
-      hours: duration.hours(),
-      minutes: duration.minutes(),
-      seconds: duration.seconds(),
+      hms: {
+        hours: duration.hours(),
+        minutes: duration.minutes(),
+        seconds: duration.seconds(),
+      },
     };
   }
 
