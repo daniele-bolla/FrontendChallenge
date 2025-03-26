@@ -3,16 +3,16 @@
 
   <div class="container">
     <div class="countdown_display">
-      <h1
+      <span
         appFitText
         [modelToWatch]="eventName"
         class="countdown_heading fittext"
-      >{{eventName}}</h1>
-      <h1
+      >{{eventName}}</span>
+      <span
       appFitText
       [modelToWatch]="countdownDays"
       class="countdown fittext"
-      >{{formattedCountdown}}</h1>
+      >{{formattedCountdown}}</span>
     </div>
     <form class="countdown_form">
       <mat-form-field appearance="outline">
@@ -22,7 +22,7 @@
           [(ngModel)]="eventName"
           name="eventName"
           [ngModelOptions]="{standalone: true}"
-          (ngModelChange)="updateEventName"
+          (ngModelChange)="updateEventName()"
         >
       </mat-form-field>
       <mat-form-field appearance="outline">
@@ -34,7 +34,7 @@
           [min]="tomorrow"
           placeholder="Countdown Date"
           [(ngModel)]="eventDate"
-          (dateChange)="updateEventDate"
+          (dateChange)="updateEventDate()"
           name="eventDate"
           [ngModelOptions]="{standalone: true}"
         >

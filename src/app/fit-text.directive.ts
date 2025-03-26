@@ -55,7 +55,7 @@ export class FitTextDirective implements AfterViewInit, OnChanges {
       element.style.fontSize = `${fontSize}px`;
     }
 
-    if (element.scrollWidth > parentWidth) {
+    while (element.scrollWidth > parentWidth && fontSize > 10) {
       fontSize -= 1;
       element.style.fontSize = `${fontSize}px`;
     }

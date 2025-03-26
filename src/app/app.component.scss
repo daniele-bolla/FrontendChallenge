@@ -9,6 +9,7 @@ main {
   align-items: center;
   position: relative;
   flex-direction: column;
+  overflow: hidden;
 
   .countdown_heading {
     color:$bordeaux;
