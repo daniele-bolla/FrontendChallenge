@@ -42,7 +42,7 @@ const getNextDays = (currentDate = new Date(), daysToAdd = 1) => {
 })
 export class AppComponent implements OnInit, OnDestroy {
   eventName = 'Time to Midsummer Eve';
-  eventDate = '2025-06-21';
+  eventDate = dayjs().year() + '-06-21';
   tomorrow = getNextDays();
   countdown: { days: number; hours: number; minutes: number; seconds: number } =
     {
